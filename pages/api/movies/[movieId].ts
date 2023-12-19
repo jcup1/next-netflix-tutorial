@@ -23,10 +23,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const movies = await prismadb.movie.findUnique({
       where: {
         id: movieId
-      }
+      },
+      include: {
+        ratings: true,
+      },
     });
 
-    return res.status(200).json(movies);
+    if (!movies) {
+      throw new Error('Invalid Movie ID');
+    }
+
+    const totalRating = movies.ratings.reduce(
+      (sum, rating) => sum + rating.value,
+      0
+    );
+    const averageRating =
+      movies.ratings.length > 0
+        ? totalRating / movies.ratings.length
+        : null;
+
+    return res.status(200).json({...movies, averageRating});
   } catch (error) {
     console.log(error);
     return res.status(500).end();

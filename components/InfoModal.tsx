@@ -64,6 +64,9 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
               <p className="text-white text-lg">
                 {data?.genre}
               </p>
+              <p className="text-white text-lg">
+                Rating: {data?.averageRating}
+              </p>
             </div>
             <p className="text-white text-lg">
               {data?.description}

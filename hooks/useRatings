@@ -1,0 +1,18 @@
+import useSwr from 'swr'
+import fetcher from '@/libs/fetcher';
+
+const useRatings = () => {
+  const { data, error, isLoading, mutate } = useSwr('/api/ratings', fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+  return {
+    data,
+    error,
+    isLoading,
+    mutate
+  }
+};
+
+export default useRatings;
