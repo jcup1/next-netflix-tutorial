@@ -23,6 +23,7 @@ model User {
   sessions Session[]
   accounts Account[]
   favoriteIds String[] @db.ObjectId
+  ratings Rating[]
 }
 
 model Account {
@@ -69,4 +70,17 @@ model Movie {
   thumbnailUrl String
   genre String
   duration String
+  ratings Rating[]
+}
+
+model Rating {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  value Float
+  userId String @db.ObjectId
+  movieId String @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  movie Movie @relation(fields: [movieId], references: [id])
 }
