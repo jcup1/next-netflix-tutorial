@@ -21,7 +21,6 @@ jobs:
       - name: Super-linter
         uses: super-linter/super-linter@v5
         env:
-          DEFAULT_BRANCH: master
           # To report GitHub Actions status checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: false
