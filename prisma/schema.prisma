@@ -70,3 +70,12 @@ model Movie {
   genre String
   duration String
 }
+
+model MovieRelations {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  primaryMovieId String
+  secondaryMovieId String
+  value Int
+
+  @@unique([primaryMovieId, secondaryMovieId])
+}
