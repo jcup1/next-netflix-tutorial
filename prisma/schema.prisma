@@ -71,11 +71,10 @@ model Movie {
   duration String
 }
 
-model MovieRelations {
+model MovieRelation {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   primaryMovieId String
   secondaryMovieId String
-  value Int
 
   @@unique([primaryMovieId, secondaryMovieId])
 }
